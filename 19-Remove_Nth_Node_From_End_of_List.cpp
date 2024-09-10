@@ -20,7 +20,9 @@ public:
             n--;
             temp = temp->next;
         }
-        
+
+        //if n is equal to the number of elements in the LinkedList
+        //that means removing the first element from the LinkedList
         if(temp == NULL){
             return head->next;
         }
