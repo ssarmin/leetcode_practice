@@ -1,5 +1,5 @@
 // https://leetcode.com/problems/jump-game/description/
-Brute force approach:
+// Brute force approach:
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
@@ -14,11 +14,33 @@ public:
     }
 };
 
+// DP Approach:
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        vector<bool> visit(nums.size(), false);
+        visit[nums.size()-1] = true;
+
+        for(int i=nums.size()-2; i>=0; i--){
+            for(int k=1; k<=nums[i] && i+k < nums.size(); k++){
+                if(visit[i+k]){
+                    visit[i] = true;
+                    break;
+                }
+            }
+        }
+        return visit[0];
+    }
+};
+
 //Time complexity: O(n*n)
 //n: number of elements in the array
+// Space complexity: O(n)
 
 /*
 Extra testcases: 
+[2,3,1,1,4,0,5,3,3,1,5,2,6,7,2,0,2,4,6,2]
+[3,2,1,4,0,3,6,3,6,3,2,5,2,0,0,0,1,2,45]
 [2,3,0,0,4]
 [3,0,0,0,4]
 [2,5,0,0]
