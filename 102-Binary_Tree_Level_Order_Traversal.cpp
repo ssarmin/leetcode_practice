@@ -41,5 +41,8 @@ public:
 /*
 Extra testcases:
 [3,9,20,null,null,15,8,5,89,7]
+[1,2,null,3,null,4,null,5]
+[1,2,3,4,5]
+[1,2,3,4,null,null,5]
 */
 //Time complexity: O(n)
