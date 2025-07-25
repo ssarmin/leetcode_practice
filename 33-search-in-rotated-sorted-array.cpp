@@ -6,23 +6,30 @@ public:
     int search(vector<int>& nums, int target) {
         int start = 0;
         int end = nums.size()-1;
-
+        
         while(start <= end){
             int mid = (end - start)/2 + start;
+            cout << start << " " << end << endl;
             if(nums[mid] == target){
                 return mid;
             }else{
-                if(nums[mid] > nums[end]){//left side sorted
-                    if(nums[mid] < target || target < nums[start]){
-                        start = mid+1;
-                    }else{
+                //it's better to check with the 'end'
+                //as for 2 values, start and mid would point to the same value
+                if(nums[end] < nums[mid]){//left sorted
+                    //as the left side sorted
+                    //we are looking if the target within [start, mid] range
+                    if(nums[start] <= target && target < nums[mid]){
                         end = mid-1;
+                    }else{
+                        start = mid+1;
                     }
-                }else{//right side sorted
-                    if(nums[mid] > target || target > nums[end]){
-                        end = mid-1;
-                    }else{
+                }else{//right sorted
+                    //as the right side sorted
+                    //we are looking if the target within [mid, end] range
+                    if(nums[mid] < target && target <= nums[end]){
                         start = mid+1;
+                    }else{
+                        end = mid-1;
                     }
                 }
             }
