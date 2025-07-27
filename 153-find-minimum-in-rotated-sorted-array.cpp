@@ -1,28 +1,21 @@
 // https://leetcode.com/problems/find-minimum-in-rotated-sorted-array
+//find which part is sorted;
+//min would be the non-sorted part, that means the pivot element on that side
 class Solution {
 public:
-    int findMin(vector<int>& nums) {
+    int findMin(vector<int> &nums) {
         int start = 0;
         int end = nums.size()-1;
         int val = nums[0];
         while(start <= end){
             int mid = (end - start)/2 + start;
             val = min(val, nums[mid]);
-            if(nums[mid] > nums[start]){//left sorted
-                if(nums[mid] > nums[end]){//min in right side
-                    start = mid+1;
-                }else{
+            if(nums[mid] < nums[end]){//right sorted
                     end = mid-1;
-                }
-            }else{//right sorted
-                if(nums[mid] < nums[end]){//
-                    end = mid-1;
-                }else{
-                    start = mid+1;
-                }
+            }else{//left sorted
+                start = mid+1;
             }
         }
-
         return val;
     }
 };
