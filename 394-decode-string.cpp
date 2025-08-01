@@ -18,7 +18,6 @@ public:
                 str += s[i];
                 i++;
             }
-            // cout << str << endl;
             if(str != ""){
                 string temp = str;
                 while(!_stack.empty() && !_stack.top().first){
@@ -38,7 +37,6 @@ public:
                     num = _stack.top().second;
                     _stack.pop();
                 }
-                cout << str << " " << num << endl;
                 int n = stoi(num);
                 string temp = "";
                 while(n--){
