@@ -46,7 +46,6 @@ public:
                             visit[i] = true;
                         }
                     }else{
-                        cout << v[i] << endl;
                         if(!visit[v[i]]){
                             if(v[i]+1 == last)
                                 return count;
