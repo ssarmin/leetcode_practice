@@ -32,3 +32,44 @@ public:
         }
     }
 };
+
+
+//iterative
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if(root == nullptr)
+            return;
+        stack<TreeNode*> s;
+        s.push(root);
+        TreeNode* prev = nullptr;
+        while(!s.empty()){
+            root = s.top();
+            s.pop();
+            TreeNode* l = root->left;
+            TreeNode* r = root->right;
+            root->left = nullptr;
+            if(prev != nullptr){
+                prev->right = root;
+            }
+            prev = root;
+            if(r)
+                s.push(r);
+            if(l)
+                s.push(l);
+        }
+    }
+};
+
+// [1,2,5,3,null,null,6]
