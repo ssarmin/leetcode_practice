@@ -27,3 +27,13 @@ public:
         return max_depth;
     }
 };
+
+//Time complexity: O(N)
+/*
+Extra testcases:
+[3,9,20,null,null,15,7,null,8,5,null,9]
+[]
+[1]
+[1,2,3,4,5]
+[0,0,0,0,null,null,0,null,null,null,0]
+*/
