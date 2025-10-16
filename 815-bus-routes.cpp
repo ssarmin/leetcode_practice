@@ -1,4 +1,43 @@
 //https://leetcode.com/problems/bus-routes
+class Solution {
+public:
+    int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
+        if(source == target)
+            return 0;
+        unordered_map<int, vector<int>> m;
+        for(int i=0; i<routes.size(); i++){
+            for(auto node: routes[i]){
+                m[node].push_back(i);
+            }
+        }
+        unordered_set<int> s_route, s_node;
+        s_node.insert(source);
+        queue<int> q;
+        q.push(source);
+        int val = 0;
+        while(!q.empty()){
+            int size = q.size();
+            val++;
+            while(size--){
+                int node = q.front();
+                q.pop();
+                for(auto r: m[node]){
+                    if(s_route.count(r))
+                        continue;
+                    for(auto n: routes[r]){
+                        if(s_node.count(n))continue;
+                        if(n == target)
+                            return val;
+                        q.push(n);
+                        s_node.insert(n);
+                    }
+                    s_route.insert(r);
+                }
+            }
+        }
+        return -1;
+    }
+};
 // [[1,2,7],[3,6,7]]
 // 1
 // 6
