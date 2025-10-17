@@ -1,4 +1,6 @@
 //https://leetcode.com/problems/split-two-strings-to-make-palindrome
+"abeeecd"
+"dzfffbz"
 "aejbaalflrmkswrydwdkdwdyrwskmrlfqizjezd"
 "uvebspqckawkhbrtlqwblfwzfptanhiglaabjea"
 "pvhmupgqeltozftlmfjjde"
