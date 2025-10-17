@@ -1,4 +1,35 @@
 //https://leetcode.com/problems/split-two-strings-to-make-palindrome
+class Solution {
+public:
+     bool check(string temp){
+        if(temp.size() <= 1)
+            return true;
+        for(int i=0; i<temp.size()/2; i++){
+            if(temp[i] != temp[temp.size()-i-1])
+                return false;
+        }
+        return true;
+    }
+    bool helper(string a, string b){
+        if(a.size() == 1 && b.size() == 1)
+            return true;
+        for(int i=0; i<a.size()/2; i++){
+            if(a[i] == b[b.size()-1-i])
+                continue;
+            int len = a.size()-i*2;
+            string str_a = a.substr(i, len);
+            string str_b = b.substr(i, len);
+            if(check(str_a) || check(str_b))
+                return true;
+            else
+                return false;
+        }
+        return true;
+    }
+    bool checkPalindromeFormation(string a, string b) {
+        return helper(a, b) || helper(b, a);
+    }
+};
 "abeeecd"
 "dzfffbz"
 "aejbaalflrmkswrydwdkdwdyrwskmrlfqizjezd"
