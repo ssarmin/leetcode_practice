@@ -3,84 +3,71 @@ class WordDictionary {
 public:
     struct Trie{
         bool isLeaf;
-        Trie *children[26];
+        Trie* children[26];
         Trie(){
             isLeaf = false;
             for(int i=0; i<26; i++){
-                children[i] = NULL;
+                children[i] = nullptr;
             }
         }
     };
-    
-    Trie* root = NULL;
-
+    Trie* root;
     WordDictionary() {
-        root = new Trie();
+        root = nullptr;
     }
     
     void addWord(string word) {
-        if(root == NULL){
+        if(root == nullptr)
             root = new Trie();
-        }
         Trie* node = root;
-
-        for(char ch: word){
+        for(auto ch: word){
             int index = ch - 'a';
-            if(node->children[index] == NULL){
+            if(node->children[index] == nullptr){
                 node->children[index] = new Trie();
             }
             node = node->children[index];
         }
-
         node->isLeaf = true;
     }
     
-    bool dfs(Trie* node, string word, int start){
-        queue<pair<Trie*, int>> q;
-        q.push(make_pair(node, start));
-
-        while(!q.empty()){
-            int size = q.size();
-
-            for(int s=0; s<size; s++){
-                pair<Trie*, int> p = q.front();
-                q.pop();
-                int index = p.second;
-                Trie* n = p.first;
-                if(n == NULL)
-                    continue;
-                if(index == word.size()){
-                    if(p.first->isLeaf)
-                        return true;
-                    else if(q.empty())
-                        return false;
-                    else
-                        continue;
+    bool find(string word, int i, Trie* node){
+        if(node == nullptr)
+            return false;
+        for(; i<word.size(); i++){
+            char ch = word[i];
+            if(node == nullptr)
+                return false;
+            if(ch == '.'){
+                for(int k=0; k<26; k++){
+                    if(node && node->children[k]){
+                        if(find(word, i+1, node->children[k]))
+                            return true;
+                    }
                 }
-                
-                if(word[index] == '.'){
-                    for(int i=0; i<26; i++){
-                        if(n->children[i])
-                            q.push(make_pair(n->children[i], index+1));
-                    }
+                return false;
+            }else{
+                int index = ch - 'a';
+                if(node && node->children[index]){
+                    node = node->children[index];
                 }else{
-                    if(n->children[word[index] - 'a']){
-                        q.push(make_pair(n->children[word[index] - 'a'], index+1));
-                    }
+                    return false;
                 }
             }
         }
-        return false;
+        return node->isLeaf;
     }
     bool search(string word) {
-        if(root == NULL){
-            return false;
-        }
         Trie* node = root;
-        return dfs(node, word, 0);
+        return find(word, 0, node);
     }
 };
 
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
 // Extra testcases:
 // ["WordDictionary","addWord","search","search","search","search"]
 // [[],["aa"],["ad"],["a"],[".a"],[".."]]
