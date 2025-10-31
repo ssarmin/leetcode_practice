@@ -1,22 +1,16 @@
 //https://leetcode.com/problems/number-of-recent-calls
 class RecentCounter {
 public:
-    vector<pair<int, int>> v;
-    int count;
+    queue<int> q;
     RecentCounter() {
-        count = 0;
     }
     
     int ping(int t) {
-        v.push_back({t, count});
-        int res = 0;
-        for(int i=v.size()-1; i>=0; i--){
-            if(v[i].first < (t-3000))
-                break;
-            res++;
+        q.push(t);
+        while(!q.empty() && t - q.front() > 3000){
+            q.pop();
         }
-        count++;
-        return res;
+        return q.size();
     }
 };
 
