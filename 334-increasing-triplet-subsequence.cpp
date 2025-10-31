@@ -16,6 +16,28 @@ public:
     }
 };
 
+class Solution {
+public:
+    bool increasingTriplet(vector<int>& nums) {
+        vector<int> max_v(nums.size(), nums.back());
+        vector<int> min_v(nums.size(), nums.front());
+
+        for(int i=1; i<nums.size(); i++){
+            min_v[i] = min(min_v[i-1], nums[i]);
+        }
+
+        for(int i=nums.size()-2; i >= 0; i--){
+            max_v[i] = max(max_v[i+1], nums[i]);
+        }
+
+        for(int i=1; i<nums.size()-1; i++){
+            if(nums[i] > min_v[i] && nums[i] < max_v[i])
+                return true;
+        }
+        return false;
+    }
+};
+
 // [20,100,10,12,5,13]
 // [1,5,0,4,1,3]
 // [1]
