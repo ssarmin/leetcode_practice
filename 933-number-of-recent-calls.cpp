@@ -25,3 +25,5 @@ public:
  * RecentCounter* obj = new RecentCounter();
  * int param_1 = obj->ping(t);
  */
+// ["RecentCounter","ping","ping","ping","ping","ping"]
+// [[],[1178],[1483],[1563],[4054],[4152]]
