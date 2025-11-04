@@ -31,3 +31,5 @@ public:
  * int param_1 = obj->popSmallest();
  * obj->addBack(num);
  */
+["SmallestInfiniteSet","popSmallest","addBack","addBack","popSmallest","addBack","popSmallest","popSmallest","popSmallest"]
+[[],[],[1],[1],[],[1],[],[],[]]
