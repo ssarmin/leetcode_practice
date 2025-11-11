@@ -44,5 +44,13 @@ public:
  * bool param_2 = obj->hasNext();
  */
 
-// ["BSTIterator","hasNext","next","hasNext","next","hasNext","next","hasNext","next","hasNext"]
-// [[[3,1,4,null,2]],[],[],[],[],[],[],[],[],[]]
+["BSTIterator","next","hasNext","next","hasNext","next","hasNext","next","hasNext"]
+[[[7,null,15,9,16]],[],[],[],[],[],[],[],[]]
+["BSTIterator","next","hasNext","next","hasNext","next","hasNext","next","hasNext"]
+[[[9,6,10,3,null,null,null]],[],[],[],[],[],[],[],[]]
+["BSTIterator","next","hasNext","next","hasNext","next","hasNext","next","hasNext","next","hasNext","next","hasNext","next","hasNext"]
+[[[8,5,10,3,6,9,12,1,null,null,7,null,null,11,null]],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+["BSTIterator","hasNext","next","hasNext"]
+[[[1]],[],[],[]]
+["BSTIterator","hasNext","next","hasNext","next","hasNext","next","hasNext","next","hasNext"]
+[[[3,1,4,null,2]],[],[],[],[],[],[],[],[],[]]
