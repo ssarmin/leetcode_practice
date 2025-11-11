@@ -1,46 +1,29 @@
 //https://leetcode.com/problems/greatest-common-divisor-of-strings
-
 class Solution {
 public:
     string gcdOfStrings(string str1, string str2) {
-        unordered_set<char> s_1(str1.begin(), str1.end());
-        unordered_set<char> s_2(str2.begin(), str2.end());
-        if(s_1.size() != s_2.size())
-            return "";
-        
-        string res = "";
-        int size = s_1.size();
-        while(size <= str1.size() && size <= str2.size()){
-            cout << size << endl;
-            if(str1.size() % size == 0 && str2.size() % size == 0){
-                int index = size;
-                string str = str1.substr(0, size);
-                cout << str << endl;
-                bool flag = true;
-                while(index + str.size() <= str1.size()){
-                    string temp = str1.substr(index, size);
-                    if(temp != str){
-                        flag = false;
-                        break;
-                    }
-                    index = index + size;
+        if(str1.size() < str2.size())
+            return gcdOfStrings(str2, str1);
+        int len = str2.size();
+        while(len >= 1){
+            if(str2.size()%len == 0 && str1.size()%len == 0){
+                string res = str2.substr(0, len);
+                string temp1 = "";
+                string temp2 = "";
+                while(temp2.size() < str2.size()){
+                    temp2 += res;
                 }
-                index = size;
-                while(index + str.size() <= str2.size() && flag){
-                    string temp = str2.substr(index, size);
-                    if(temp != str){
-                        flag = false;
-                        break;
+                if(temp2 == str2){
+                    while(temp1.size() < str1.size()){
+                        temp1 += res;
                     }
-                    index = index + size;
-                }
-                if(flag){
-                    res = str;
+                    if(temp1 == str1)
+                        return res;
                 }
             }
-            size++;
+            len--;
         }
-        return res;
+        return "";
     }
 };
 
