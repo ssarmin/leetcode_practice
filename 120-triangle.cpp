@@ -2,6 +2,26 @@
 class Solution {
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
+        vector<int> dp(triangle.size(), INT_MAX);
+        dp[0] = triangle[0][0];
+        int val = INT_MAX;
+        for(int r=1; r<triangle.size(); r++){
+            for(int c=triangle[r].size() - 1; c > 0; c--){
+                dp[c] = min(dp[c], dp[c-1]) + triangle[r][c];
+                if(r == triangle.size()-1)
+                    val = min(val, dp[c]);
+            }
+            dp[0] = dp[0] + triangle[r][0];
+            if(r == triangle.size()-1)
+                val = min(val, dp[0]);
+        }
+        return val == INT_MAX? dp[0]: val;
+    }
+};
+
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
         vector<vector<int>> dp(triangle.size(), vector<int>(triangle.size(), INT_MAX));
         dp[0][0] = triangle[0][0];
         for(int r=0; r<triangle.size()-1; r++){
