@@ -2,9 +2,7 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        vector<vector<int>> dp(s.size(), vector<int>(s.size(), INT_MIN));
-        vector<vector<bool>> visit(s.size(), vector<bool>(s.size(), false));
-        queue<pair<int, int>> q;
+        queue<tuple<int, int, int>> q;
         pair<int, int> p = {0, 0};
         int max_val = 1;
         for(int i=0; i<s.size();i++){
@@ -16,22 +14,18 @@ public:
                     val++;
                     continue;
                 }
-                dp[i][j-1] = val;
-                dp[j-1][i] = val;
                 if(val > max_val){
                     max_val = val;
                     p = {i, j-1};
                 }
-                q.push({i, j-1});
+                q.push({i, j-1, val});
                 i = j-1;
                 break;
             }
             if(!flag){
-                q.push({i, i});
+                q.push({i, i, val});
             }else{
-                q.push({i, s.size()-1});
-                dp[i][s.size()-1] = val;
-                dp[s.size()-1][i] = val;
+                q.push({i, s.size()-1, val});
                 if(val > max_val){
                     max_val = val;
                     p = {i, s.size()-1};
@@ -39,18 +33,12 @@ public:
             }
         }
         while(!q.empty()){
-            int start = q.front().first;
-            int end = q.front().second;
+            auto [start, end, val] = q.front();
             q.pop();
-            if(visit[start][end])
-                continue;
-            visit[start][end] = true;
             if(start-1 >= 0 && end+1 < s.size() && s[start-1] == s[end+1]){
-                q.push({start-1, end+1});
-                dp[start-1][end+1] = dp[start][end] + 2;
-                dp[end+1][start-1] = dp[start-1][end+1];
-                if(dp[start-1][end+1] > max_val){
-                    max_val = dp[start-1][end+1];
+                q.push({start-1, end+1, val+2});
+                if(val+2 > max_val){
+                    max_val = val+2;
                     p = {start-1, end+1};
                 }
             }
