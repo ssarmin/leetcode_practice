@@ -25,5 +25,12 @@ public:
     }
 };
 
-// "MCDLXXVI"
-// "MCMXCIV"
+/*
+Extra testcases:
+"XLIX"
+"XCIX"
+"MCMXCVI"
+"MCDLXXVI"
+"MCMXCIV"
+"MMMDCCCLXXXVIII"
+*/
