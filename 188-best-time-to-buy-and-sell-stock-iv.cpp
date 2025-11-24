@@ -1,4 +1,27 @@
 //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv
+class Solution {
+public:
+    int helper(int k, vector<int>& prices, int index, bool buy, unordered_map<int, unordered_map<int, unordered_map<bool, int>>> &m){
+        if(index >= prices.size() || k <= 0)
+            return 0;
+        if(m.count(index) && m[index].count(k) && m[index][k].count(buy))
+            return m[index][k][buy];
+        int nothing = helper(k, prices, index+1, buy, m);
+        int val = 0;
+        if(buy){
+            val = -prices[index] + helper(k, prices, index+1, !buy, m);
+        }else{
+            val = prices[index] + helper(k-1, prices, index+1, !buy, m);
+        }
+        m[index][k][buy] = max(nothing, val);
+        return m[index][k][buy];
+    }
+    int maxProfit(int k, vector<int>& prices) {
+        unordered_map<int, unordered_map<int, unordered_map<bool, int>>> m;
+        return helper(k, prices, 0, true, m);
+    }
+};
+
 /*
 2
 [6,1,3,2,4,7]
