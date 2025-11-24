@@ -16,20 +16,13 @@ public:
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        int maxVal = nums[0];
+        int max_val = nums[0];
         int sum = nums[0];
-
         for(int i=1; i<nums.size(); i++){
-            int temp = sum + nums[i];
-            if(temp > nums[i]){
-                sum = temp;
-            }else{
-                sum = nums[i];
-            }
-            maxVal = max(maxVal, sum);
+            sum = max(nums[i] + sum, nums[i]); 
+            max_val = max(max_val, sum);
         }
-
-        return maxVal;
+        return max_val;
     }
 };
 // Time complexity: O(n)
