@@ -1,4 +1,26 @@
 //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee
+class Solution {
+public:
+    int helper(vector<int> &prices, int fee, int index, unordered_map<int, unordered_map<bool, int>> &m, bool buy){
+        if(index >= prices.size())
+            return 0;
+        if(m.count(index) && m[index].count(buy))
+            return m[index][buy];
+        int nothing = helper(prices, fee, index+1, m, buy);
+        int val;
+        if(buy){
+            val = -prices[index] + helper(prices, fee, index+1, m, !buy);
+        }else{
+            val = prices[index] - fee + helper(prices, fee, index+1, m, !buy);
+        }
+        m[index][buy] = max(nothing, val);
+        return m[index][buy];
+    }
+    int maxProfit(vector<int>& prices, int fee) {
+        unordered_map<int, unordered_map<bool, int>> m;
+        return helper(prices, fee, 0, m, true);
+    }
+};
 /*
 [7,1,5,3,6,4]
 3
