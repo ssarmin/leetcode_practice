@@ -2,25 +2,33 @@
 class Solution {
 public:
     int reverse(int x) {
-        if(x == INT_MIN || x == INT_MAX)
-            return 0;
-        bool neg = false;
-        if(x < 0){
-            neg = true;
-            x = abs(x);
-        }
-        long long val = 0;
-        while(x){
-            val = val*10 + x%10;
-            x = x/10;
-            if(val > INT_MAX){
-                return 0;
+        string max_str = to_string(INT_MAX);
+        string str = to_string(x);
+        std::reverse(str.begin(), str.end());
+        if(x >= 0){
+            if(str.size() == max_str.size()){
+                if(str > max_str)
+                    return 0;
+                else
+                    return stoi(str);
+            }else{
+                return stoi(str);
             }
-            if(neg && val -1 > INT_MAX){
-                return 0;
+        }else{
+            max_str.back() += '1' - '0';
+            str.pop_back();
+            if(str.size() == max_str.size()){
+                if(str > max_str)
+                    return 0;
+                else{
+                    str.insert(str.begin(), '-');
+                    return stoi(str);
+                }
+            }else{
+                str.insert(str.begin(), '-');
+                    return stoi(str);
             }
         }
-        return (neg)? -1*(int)val: (int)val;
     }
 };
 
