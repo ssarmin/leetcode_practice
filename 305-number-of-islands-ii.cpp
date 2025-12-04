@@ -1,4 +1,58 @@
 //https://leetcode.com/problems/number-of-islands-ii
+class Solution {
+public:
+    int find(const int id, const vector<int> &parent){
+        if(id == parent[id])
+            return id;
+        return find(parent[id], parent);
+    }
+    void unite(int nid, int id, vector<int> &rank, vector<int> &parent, int &land){
+        int p_id = find(id, parent);
+        int p_nid = find(nid, parent);
+        if(p_id == p_nid)
+            return;
+        
+        if(rank[p_id] > rank[p_nid]){
+            parent[p_id] = p_nid;
+        }else if(rank[p_id] < rank[p_nid]){
+            parent[p_nid] = p_id;
+        }else{
+            parent[p_id] = p_nid;
+            rank[p_nid]++;
+        }
+        land--;
+    }
+    vector<int> numIslands2(int m, int n, vector<vector<int>>& positions) {
+        vector<int> res;
+        vector<int> parent(m*n, -1);
+        vector<int> rank(m*n, 0);
+        int land = 0;
+        int dx[4] = {0, 0, 1, -1};
+        int dy[4] = {1, -1, 0, 0};
+        for(auto p: positions){
+            int id = p[0]*n + p[1];
+            if(parent[id] != -1){
+                res.push_back(land);
+                continue;
+            }
+            parent[id] = id;
+            rank[id] = 1;
+            land++;
+            for(int i=0; i<4; i++){
+                int x = p[0] + dx[i];
+                int y = p[1] + dy[i];
+                if(x >= 0 && y >= 0 && x < m && y < n){
+                    int n_id = x*n + y;
+                    if(parent[n_id] != -1){
+                        unite(n_id, id, rank, parent, land);
+                    }
+                }
+            }
+            res.push_back(land);
+        }
+        return res;
+    }
+};
 /*
 100
 100
