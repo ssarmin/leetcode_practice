@@ -1,80 +1,65 @@
 //https://leetcode.com/problems/pacific-atlantic-water-flow
 class Solution {
 public:
+    void update(queue<pair<int, int>> &q, char name, vector<vector<pair<char, char>>> &ocean, const vector<vector<int>>& heights){
+        int dx[] = {0, 0, 1, -1};
+        int dy[] = {1, -1, 0, 0};
+        while(!q.empty()){
+            auto [r, c] = q.front();
+            q.pop();
+            for(int i=0; i<4; i++){
+                int x = dx[i] + r;
+                int y = dy[i] + c;
+                if(x >= 0 && x < heights.size() && y >= 0 && y < heights[0].size() && heights[x][y] >= heights[r][c]){
+                    if(name == 'P'){
+                        if(ocean[x][y].first == '-'){
+                            ocean[x][y].first = 'P';
+                            q.push({x, y});
+                        }
+                    }else{
+                        if(ocean[x][y].second == '-'){
+                            ocean[x][y].second = 'A';
+                            q.push({x, y});
+                        }
+                    }
+                }
+            }
+        }
+    }
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        vector<vector<int>> res;
         int row = heights.size();
         int col = heights[0].size();
-        //atlantic, pacific
-        vector<vector<pair<bool, bool>>> v(row, vector<pair<bool, bool>> (col, {false, false}));
-        queue<pair<int, int>> pacific;
-        queue<pair<int, int>> atlantic;
+        vector<vector<pair<char, char>>> ocean(row, vector<pair<char, char>> (col, {'-', '-'}));//{pacific, atlantic}
+
+        queue<pair<int, int>> q_pacific, q_atlantic;
         for(int r=0; r<row; r++){
-            v[r][0].second = true;
-            pacific.push({r,0});
-            v[r][col-1].first = true;
-            atlantic.push({r, col-1});
+            ocean[r][0].first = 'P';
+            q_pacific.push({r,0});
+            ocean[r][col-1].second = 'A';
+            q_atlantic.push({r, col-1});
         }
 
         for(int c=0; c<col; c++){
-            v[0][c].second = true;
-            pacific.push({0, c});
-            v[row-1][c].first = true;
-            atlantic.push({row-1, c});
-        }
-        int dx[4] = {0, 0, -1, 1};
-        int dy[4] = {-1, 1, 0, 0};
-
-        set<pair<int, int>> s_pacific;
-        while(!pacific.empty()){
-            int r = pacific.front().first;
-            int c = pacific.front().second;
-            pacific.pop();
-            if(s_pacific.count({r,c}))
-                continue;
-            s_pacific.insert({r,c});
-
-            for(int i=0; i<4; i++){
-                int x = dx[i]+r;
-                int y = dy[i]+c;
-                if(x>=0 && x<row && y>=0 && y<col && !s_pacific.count({x,y}) && heights[x][y] >= heights[r][c]){
-                    v[x][y].second = true;
-                    pacific.push({x,y});
-                }
-            }
+            ocean[0][c].first = 'P';
+            q_pacific.push({0,c});
+            ocean[row-1][c].second = 'A';
+            q_atlantic.push({row-1,c});
         }
 
-        set<pair<int, int>> s_atlantic;
-        while(!atlantic.empty()){
-            int r = atlantic.front().first;
-            int c = atlantic.front().second;
-            atlantic.pop();
-            if(s_atlantic.count({r,c}))
-                continue;
-            s_atlantic.insert({r,c});
+        update(q_pacific, 'P', ocean, heights);
+        update(q_atlantic, 'A', ocean, heights);
 
-            for(int i=0; i<4; i++){
-                int x = dx[i]+r;
-                int y = dy[i]+c;
-                if(x>=0 && x<row && y>=0 && y<col && !s_atlantic.count({x,y}) && heights[x][y] >= heights[r][c]){
-                    v[x][y].first = true;
-                    atlantic.push({x,y});
-                }
-            }
-        }
-
+        vector<vector<int>> res;
         for(int r=0; r<row; r++){
             for(int c=0; c<col; c++){
-                if(v[r][c].first && v[r][c].second){
+                if(ocean[r][c].first == 'P' && ocean[r][c].second == 'A'){
                     res.push_back({r,c});
                 }
             }
         }
-
         return res;
     }
 };
-
 /*
 [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
 [[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]
