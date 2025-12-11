@@ -1,9 +1,6 @@
 //https://leetcode.com/problems/minimum-knight-moves
 class Solution {
 public:
-    long distance(int a, int b, int x, int y){
-        return ((a - x)*(a - x)) + ((b - y)*(b-y)); 
-    }
     int minKnightMoves(int x, int y) {
         int move = 0;
         queue<pair<int, int>> pq;
