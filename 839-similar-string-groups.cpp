@@ -1,0 +1,13 @@
+//https://leetcode.com/problems/similar-string-groups
+["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaebdfc"]
+["kccomwcgcs", "socgcmcwkc", "sgckwcmcoc", "coswcmcgkc", "cowkccmsgc", "cosgmccwkc", "sgmkwcccoc", "coswmccgkc", "kowcccmsgc", "kgcomwcccs"]
+["koqnn","knnqo","noqnk","nqkon"]
+["blw","bwl","wlb"]
+["tars","rats","arts","star"]
+["koqnn","knnqo","noqnk","nqkon"]
+["abc","acb","bac","bca","cab","cba"]
+["abcd","abdc","acbd","acdb","adbc","adcb"]
+["aabb","abab","abba","baab","baba","bbaa"]
+["xxyy","xyxy","yxxy","yyxx","yxyx"]
+["abcdefghijkl","abcedfghijkl","abcdeghfijkl","bacdefghijkl","abcdefghijkl"]
+["mnoopp","monopp","mnoopp","mnoopp"]
