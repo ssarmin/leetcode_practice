@@ -13,7 +13,32 @@ public:
         return left;
     }
 };
-
+/*
+416
+436
+2
+25
+14
+28
+43
+60
+25
+35
+4194304
+134217709
+536870913
+1073741804
+2097152
+8388583
+268435456
+1073741822
+214748364
+2147483647
+2147483646
+2147483647
+1073741832
+2147483647
+*/
 // If left is 26 and right 30, then the result would be 11000. Only the leftmost 2 bits are common.
 // So, here by right shifting both left and right, we discard all different bits. We stop when both are 11. 
 // Then we put zeros on the rightmost bits.
@@ -54,10 +79,3 @@ public:
 };
 
 // Got TLE for this solution
-
-// 214748364
-// 2147483647
-// 2147483646
-// 2147483647
-// 1073741832
-// 2147483647
