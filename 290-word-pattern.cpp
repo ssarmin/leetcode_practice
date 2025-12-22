@@ -28,6 +28,9 @@ public:
     }
 };
 
-// Extra testcases:
-// "jquery"
-// "jquery"
+/*
+"jquery"
+"jquery"
+"dog cat cat dog"
+"a"
+*/
