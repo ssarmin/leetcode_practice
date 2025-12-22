@@ -29,8 +29,10 @@ public:
 };
 
 /*
+"abba"
+"dog dog dog dog"
 "jquery"
 "jquery"
-"dog cat cat dog"
 "a"
+"dog cat"
 */
