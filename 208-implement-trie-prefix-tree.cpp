@@ -83,4 +83,6 @@ public:
 [[],["apple"],["apple"],["app"],["app"],["app"],["app"]]
 ["Trie","insert","insert","search"]
 [[],["a"],["pa"],["p"]]
+["Trie","insert","search","search","startsWith","insert","search"]
+[[],["apple"],["apple"],["app"],["apple"],["app"],["app"]]
 */
