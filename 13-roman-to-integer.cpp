@@ -2,7 +2,10 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        unordered_map<char, int> m;
+        // unordered_map<char, int> m;
+        // Use a static lookup table to avoid rebuilding it for every function call
+        // 128 covers all standard ASCII characters
+        static int m[128];
         m['I'] = 1;
         m['V'] = 5;
         m['X'] = 10;
