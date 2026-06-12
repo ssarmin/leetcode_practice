@@ -42,4 +42,7 @@ public:
         return res;
     }
 };
-// [3,9,20,null,null,15,45,2,null,34,null,7]
+/*
+[1,2,3,4,null,null,5]
+[3,9,20,null,null,15,45,2,null,34,null,7]
+*/
