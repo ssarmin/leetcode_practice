@@ -1,20 +1,26 @@
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        d = dict()
-        d_rev = dict()
-        s_list = s.split()
-        if(len(s_list) != len(pattern)):
+        l = s.split()
+        if(len(l) != len(pattern)):
             return False
-        for index in range(len(pattern)):
-            if pattern[index] in d:
-                if(d[pattern[index]] != s_list[index]):
-                    return False
-            d[pattern[index]] = s_list[index]
-        
-        for index in range(len(s_list)):
-            if s_list[index] in d_rev:
-                if(d_rev[s_list[index]] != pattern[index]):
-                    return False
-            d_rev[s_list[index]] = pattern[index]
+        m_ch_str = {}
+        m_str_ch = {}
+        for i in range(len(pattern)):
+            if pattern[i] in m_ch_str and m_ch_str[pattern[i]] != l[i]:
+                return False
+            if l[i] in m_str_ch and m_str_ch[l[i]] != pattern[i]:
+                return False
+            else:
+                m_ch_str[pattern[i]] = l[i]
+                m_str_ch[l[i]] = pattern[i]
         
         return True
+
+"""
+"abba"
+"dog dog dog dog"
+"jquery"
+"jquery"
+"a"
+"dog cat"
+"""
