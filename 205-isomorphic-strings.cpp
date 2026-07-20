@@ -26,6 +26,7 @@ public:
         return true;
     }
 };
-
-// "badc"
-// "baba"
+/*
+"badc"
+"baba"
+*/
