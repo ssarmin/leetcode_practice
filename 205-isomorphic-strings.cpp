@@ -27,6 +27,8 @@ public:
     }
 };
 /*
+"bbbaaaba"
+"aaabbbba"
 "badc"
 "baba"
 */
