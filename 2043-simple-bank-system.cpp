@@ -45,6 +45,18 @@ public:
  */
 
 /*
+["Bank","transfer","withdraw","deposit","transfer"]
+[[[500,300,200]],[1,1,100],[2,50],[3,150],[2,1,100]]
+["Bank","withdraw","transfer","deposit","transfer"]
+[[[50,100]],[1,60],[1,2,60],[1,20],[2,1,130]]
+["Bank","withdraw","transfer","deposit","transfer","withdraw"]
+[[[10,100,20,50,30]],[3,10],[5,1,20],[5,20],[3,4,15],[10,50]]
+["Bank","transfer","withdraw","deposit","transfer"]
+[[[500,300,200]],[1,1,100],[2,50],[3,150],[2,1,100]]
+["Bank","withdraw","transfer","deposit","transfer"]
+[[[50,100]],[1,60],[1,2,60],[1,20],[2,1,130]]
+["Bank","deposit","withdraw","transfer","withdraw"]
+[[[10,20]],[3,50],[1,15],[1,2,5],[2,10]]
 ["Bank","deposit","transfer","transfer"]
 [[[0]],[1,2],[1,1,1],[1,1,3]]
 ["Bank","deposit","withdraw","transfer","deposit","withdraw","transfer"]
